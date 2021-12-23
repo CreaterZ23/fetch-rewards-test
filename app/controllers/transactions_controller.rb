@@ -19,16 +19,19 @@ class TransactionsController < ApplicationController
             end
         until x == 0
             trans_by_date.each do |trans| 
-                x - trans.points  
-                
-                if trans.points > 0
-                    spend_array.push(Payer.find_by_id(trans.payer_id).partner, -(trans.points))
-                end
+                x = x - trans.points  
+                #x = 300 - 1000
+                #if x > trans.points
+                    
+                #
+        
+                # if trans.points > 0
+                #     spend_array.push(Payer.find_by_id(trans.payer_id).partner, -(trans.points))
+                # end
             end
         end
-        
-        render json: spend_array
-
+        byebug 
+        #render json: spend_array
     end
 
     def spend_params
