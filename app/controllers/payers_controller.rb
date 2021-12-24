@@ -8,10 +8,15 @@ class PayersController < ApplicationController
         render json: Payer.all
     end
 
+    def destroy
+        payer = Payer.find(params[:id])
+        payer.destroy
+    end
+
 
 
     def payer_params
-        params.permit(:partner)
+        params.permit(:payer_name)
     end
 
 

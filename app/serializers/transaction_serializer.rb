@@ -1,8 +1,8 @@
 class TransactionSerializer < ActiveModel::Serializer
-  attributes :points, :payer
+  attributes :id, :points, :payer_name, :timestamp
   
 
-  def payer
-    Payer.find_by_id(self.object.payer_id).partner
-  end
+  # def payer
+  #   Payer.find_by_id(self.object.payer_id).partner
+  # end
 end

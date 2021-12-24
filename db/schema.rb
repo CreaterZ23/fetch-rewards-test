@@ -16,17 +16,18 @@ ActiveRecord::Schema.define(version: 2021_12_23_003339) do
   enable_extension "plpgsql"
 
   create_table "payers", force: :cascade do |t|
-    t.string "partner"
-    t.bigint "transaction_id"
+    t.string "payer_name"
+    t.bigint "balance"
+    t.bigint "amount_spent"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["transaction_id"], name: "index_payers_on_transaction_id"
   end
 
   create_table "transactions", force: :cascade do |t|
     t.bigint "user_id"
-    t.integer "payer_id"
+    t.string "payer_name"
     t.integer "points"
+    t.datetime "timestamp"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_transactions_on_user_id"

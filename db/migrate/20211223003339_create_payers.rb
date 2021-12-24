@@ -1,8 +1,9 @@
 class CreatePayers < ActiveRecord::Migration[6.1]
   def change
     create_table :payers do |t|
-      t.string :partner
-      t.belongs_to :transaction
+      t.string :payer_name
+      t.bigint :balance
+      t.bigint :amount_spent
       t.timestamps
     end
   end
