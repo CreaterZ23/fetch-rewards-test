@@ -10,6 +10,7 @@ class TransactionsController < ApplicationController
         new_balance = payer.balance + trans_params[:points]
         if new_balance < 0     
         # do exceptions here
+        #Throw Exception. Insufficient balance
         else
             payer.update(balance: new_balance)
             new_transaction = Transaction.create!(trans_params)
@@ -30,34 +31,6 @@ class TransactionsController < ApplicationController
         transaction.destroy
     end
 
-    
-
-
-    def spend
-        x = spend_params[:points]
-        spend_array = []  #link this methed to the user_id
-            trans_by_date = Transaction.all.sort_by do |trans| trans.created_at
-            end
-        until x == 0
-            trans_by_date.each do |trans| 
-                x = x - trans.points  
-                #x = 300 - 1000
-                #if x > trans.points
-                    #x = x - trans.points
-                #
-        
-                # if trans.points > 0
-                #     spend_array.push(Payer.find_by_id(trans.payer_id).partner, -(trans.points))
-                # end
-            end
-        end
-        byebug 
-        #render json: spend_array
-    end
-
-    def spend_params
-        params.permit(:points)
-    end
 
     def trans_params
         params.permit(:payer_name, :points, :user_id, :timestamp)

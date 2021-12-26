@@ -16,7 +16,7 @@ class PayersController < ApplicationController
 
 
     def payer_params
-        params.permit(:payer_name)
+        params.permit(:payer_name, balance: 0, amount_spent: 0)
     end
 
 
