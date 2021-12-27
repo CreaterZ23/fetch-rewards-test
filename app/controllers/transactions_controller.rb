@@ -1,11 +1,27 @@
 class TransactionsController < ApplicationController
 
     def create
-        
+        payer_name = trans_params[:payer_name]
+        if payer_name == ""
+            render json: { error: 'Empty Payer Name'}
+        end
+
+        timestamp = trans_params[:timestamp]
+        if timestamp == ""
+            render json: { error: 'Empty Timestamp'}
+        end
+
+        points = trans_params[:points]
+        if points.nil? 
+            render json: { error: 'No Points Were Given'}
+        end
         payer = Payer.find_by(payer_name: trans_params[:payer_name])
+
         if payer.nil?
             payer = create_new_payer(trans_params)
         end
+
+        
 
         new_balance = payer.balance + trans_params[:points]
         if new_balance < 0     
