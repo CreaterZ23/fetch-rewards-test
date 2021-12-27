@@ -6,11 +6,11 @@ class TransactionsController < ApplicationController
         if payer.nil?
             payer = create_new_payer(trans_params)
         end
-        # byebug
+
         new_balance = payer.balance + trans_params[:points]
         if new_balance < 0     
-        # do exceptions here
-        #Throw Exception. Insufficient balance
+        
+        render json: { error: 'Insufficient balance'}
         else
             payer.update(balance: new_balance)
             new_transaction = Transaction.create!(trans_params)
@@ -38,8 +38,3 @@ class TransactionsController < ApplicationController
     
 end
 
-#{ "payer": "DANNON", "points": 300, "timestamp": "2020-10-31T10:00:00Z" }
-#{ "payer": "UNILEVER", "points": 200, "timestamp": "2020-10-31T11:00:00Z" }
-#{ "payer": "DANNON", "points": -200, "timestamp": "2020-10-31T15:00:00Z" }
-#  "payer": "MILLER COORS", "points": 10000, "timestamp": "2020-11-01T14:00:00Z" }
-#{ "payer": "DANNON", "points": 1000, "timestamp": "2020-11-02T14:00:00Z" }
